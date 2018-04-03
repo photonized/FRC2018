@@ -43,8 +43,12 @@ public class Lift extends Subsystem {
 		m_lift.set(down);
 	}
 	
+	public void stall() {
+		m_lift.set(stop);
+	}
+	
 	public void stop() {
-		m_lift.set(0);
+		m_lift.set(off);
 	}
     public void initDefaultCommand() {
     }

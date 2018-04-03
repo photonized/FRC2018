@@ -28,8 +28,8 @@ public class DriveTrain extends Subsystem {
     
     private DifferentialDrive m_drive;
     
-    private Encoder m_rightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
-    private Encoder m_leftEncoder = new Encoder(3, 4, true, EncodingType.k4X);
+    //private Encoder m_rightEncoder = new Encoder(1, 2, true, EncodingType.k4X);
+    //private Encoder m_leftEncoder = new Encoder(3, 4, true, EncodingType.k4X);
     
     private AnalogGyro m_gyro = new AnalogGyro(1);
     
@@ -41,22 +41,21 @@ public class DriveTrain extends Subsystem {
     	addChild("Back Left CIM", (Victor) m_backLeft);
     	addChild("Back Right CIM", (Victor) m_backRight);
     	
-    	m_left.setInverted(true);
     	m_drive = new DifferentialDrive(m_left, m_right);
     	m_drive.setSafetyEnabled(true);
     	m_drive.setExpiration(0.1);
     	m_drive.setMaxOutput(1.0);
     	
-    	m_rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-    	m_leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+    	//m_rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+    	//m_leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
     	
-    	if(Robot.isReal()) {
+    	/*if(Robot.isReal()) {
     		m_rightEncoder.setDistancePerPulse(0.0785398);
     		m_leftEncoder.setDistancePerPulse(0.0785398);
     	} else {
     		m_rightEncoder.setDistancePerPulse((4.0 * Math.PI) / (360.0 * 12.0));
     		m_rightEncoder.setDistancePerPulse((4.0 * Math.PI) / (360.0 * 12.0));
-    	}
+    	}*/
     	if(Robot.isReal()) {
     		m_gyro.setSensitivity(0.007);
     	}
@@ -68,8 +67,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void drive(Joystick joy) {
-    	m_left.set((max * joy.getRawAxis(3)) - joy.getRawAxis(0));
-    	m_right.set((max * joy.getRawAxis(3)) + joy.getRawAxis(0));
+    	m_left.set((-max * joy.getRawAxis(3)) - joy.getRawAxis(0));
+    	m_right.set((-max * joy.getRawAxis(3)) + joy.getRawAxis(0));
     	
     	m_left.set((max * joy.getRawAxis(2)) - joy.getRawAxis(0));
     	m_right.set((max * joy.getRawAxis(2)) + joy.getRawAxis(0));
@@ -79,9 +78,29 @@ public class DriveTrain extends Subsystem {
     	
     }
     
+    public void forward() {
+    	m_right.set(-0.6);
+    	m_left.set(0.6);
+    }
+    
+    public void right() {
+    	m_right.set(0.3);
+    	m_left.set(0.2);
+    }
+    
+    public void left() {
+		m_right.set(1.0);
+		m_left.set(0.4);
+    }
+    
     public void stop() {
     	m_right.set(0);
     	m_left.set(0);
+    }
+    
+    public void back() {
+    	m_right.set(0.3);
+		m_left.set(-0.37);
     }
 }
 
