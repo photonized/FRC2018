@@ -33,6 +33,10 @@ public class Claw extends Subsystem {
     	m_thrower.set(0);
     }
     
+    public void out() {
+    	m_thrower.set(output);
+    }
+    
     public boolean hasCube() {
     	return m_cubeDetector.get();
     }

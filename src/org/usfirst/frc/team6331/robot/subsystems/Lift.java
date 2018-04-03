@@ -16,23 +16,31 @@ public class Lift extends Subsystem {
 	public static final double stop = -0.3;
 	
 	private SpeedController m_lift = new Victor(8);
-	private DigitalInput m_up = new DigitalInput(1);
-	private DigitalInput m_down = new DigitalInput(2);
+	//private DigitalInput m_up = new DigitalInput(1);
+	//private DigitalInput m_down = new DigitalInput(2);
 	
 	public Lift() {
 		addChild("Lift Motor", (Victor) m_lift);
 	}
 	
-	public boolean isUp() {
+	/*public boolean isUp() {
 		return m_up.get();
 	}
 	
 	public boolean isDown() {
 		return m_up.get();
-	}
+	}*/
 	
 	public void setSpeed(double speed) {
 		m_lift.set(-speed);
+	}
+	
+	public void up() {
+		m_lift.set(up);
+	}
+	
+	public void down() {
+		m_lift.set(down);
 	}
 	
 	public void stop() {

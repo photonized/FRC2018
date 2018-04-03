@@ -15,21 +15,18 @@ public class Climb extends Subsystem {
 	public static final double stop = 0.0;
 	
 	private SpeedController m_climb = new Victor(1);
-	private DigitalInput m_up = new DigitalInput(3);
-	private DigitalInput m_down = new DigitalInput(4);
+	
 	
     public Climb() {
     	addChild("Climb Motor", (Victor) m_climb);
-    	addChild("Max Up Detector", m_up);
-    	addChild("Max Down Detector", m_down);
-    }
-
-    public boolean isUp() {
-    	return m_up.get();
     }
     
-    public boolean isDown() {
-    	return m_down.get();
+    public void down() {
+    	m_climb.set(down);
+    }
+    
+    public void up() {
+    	m_climb.set(up);
     }
     
     public void stop() {

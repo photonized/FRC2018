@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class ThrowCube extends InstantCommand {
+public class SuckCube extends InstantCommand {
 
-    public ThrowCube() {
+    public SuckCube() {
         requires(Robot.claw);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.claw.out();
+    	Robot.claw.in();
     }
 }
