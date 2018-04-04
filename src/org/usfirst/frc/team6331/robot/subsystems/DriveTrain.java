@@ -78,6 +78,11 @@ public class DriveTrain extends Subsystem {
     	
     }
     
+    public void setSpeed(double speed) {
+    	m_right.set(-speed);
+    	m_left.set(speed);
+    }
+    
     public void forward() {
     	m_right.set(-0.6);
     	m_left.set(0.6);

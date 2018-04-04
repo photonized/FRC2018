@@ -7,6 +7,11 @@
 
 package org.usfirst.frc.team6331.robot;
 
+import org.usfirst.frc.team6331.robot.commands.AutoForward;
+import org.usfirst.frc.team6331.robot.commands.AutoLeft;
+import org.usfirst.frc.team6331.robot.commands.AutoMiddle;
+import org.usfirst.frc.team6331.robot.commands.AutoRight;
+import org.usfirst.frc.team6331.robot.commands.MiddleRight;
 import org.usfirst.frc.team6331.robot.subsystems.Claw;
 import org.usfirst.frc.team6331.robot.subsystems.Climb;
 import org.usfirst.frc.team6331.robot.subsystems.DriveTrain;
@@ -43,6 +48,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		m_chooser.addDefault("Middle", new AutoMiddle());
+		m_chooser.addObject("Left", new AutoLeft());
+		m_chooser.addObject("Right", new AutoRight());
+		m_chooser.addDefault("Straight", new AutoForward());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
