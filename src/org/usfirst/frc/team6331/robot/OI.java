@@ -25,7 +25,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+	/**
+	 * The buttons on the controllers.
+	 */
 	public int logA = 2;
 	public int logB = 3;
 	public int logX = 1;
