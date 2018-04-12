@@ -11,12 +11,12 @@ import org.usfirst.frc.team6331.robot.commands.AutoForward;
 import org.usfirst.frc.team6331.robot.commands.AutoLeft;
 import org.usfirst.frc.team6331.robot.commands.AutoMiddle;
 import org.usfirst.frc.team6331.robot.commands.AutoRight;
-import org.usfirst.frc.team6331.robot.commands.MiddleRight;
 import org.usfirst.frc.team6331.robot.subsystems.Claw;
 import org.usfirst.frc.team6331.robot.subsystems.Climb;
 import org.usfirst.frc.team6331.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6331.robot.subsystems.Lift;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot; 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Right", new AutoRight());
 		m_chooser.addDefault("Straight", new AutoForward());
 		SmartDashboard.putData("Auto mode", m_chooser);
+    	CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**

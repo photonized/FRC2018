@@ -15,7 +15,7 @@ public class Claw extends Subsystem {
 	public static final double output = -1.0;
 	public static final double stop = 0.0;
 	
-	private SpeedController m_thrower = new Victor(7);
+	private SpeedController m_thrower = new Victor(3);
 	private DigitalInput m_cubeDetector;
 
     public Claw() {

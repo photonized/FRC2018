@@ -1,6 +1,5 @@
 package org.usfirst.frc.team6331.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Lift extends Subsystem {
 
-	public static final double up = -1.0;
-	public static final double down = 0.1;
+	public static final double up = 1.0;
+	public static final double down = -0.3;
 	public static final double off = 0.0;
-	public static final double stop = -0.3;
+	public static final double stop = 0.3;
 	
-	private SpeedController m_lift = new Victor(8);
+	private SpeedController m_lift = new Victor(9);
 	//private DigitalInput m_up = new DigitalInput(1);
 	//private DigitalInput m_down = new DigitalInput(2);
 	

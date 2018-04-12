@@ -7,18 +7,15 @@
 
 package org.usfirst.frc.team6331.robot;
 
-import org.usfirst.frc.team6331.robot.commands.ClimbDown;
+import org.usfirst.frc.team6331.robot.commands.ClimbDown; 
 import org.usfirst.frc.team6331.robot.commands.ClimbStop;
 import org.usfirst.frc.team6331.robot.commands.ClimbUp;
 import org.usfirst.frc.team6331.robot.commands.LiftDown;
-import org.usfirst.frc.team6331.robot.commands.LiftStop;
+import org.usfirst.frc.team6331.robot.commands.LiftStall;
 import org.usfirst.frc.team6331.robot.commands.LiftUp;
-import org.usfirst.frc.team6331.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team6331.robot.commands.StopClaw;
 import org.usfirst.frc.team6331.robot.commands.SuckCube;
 import org.usfirst.frc.team6331.robot.commands.ThrowCube;
-import org.usfirst.frc.team6331.robot.subsystems.Claw;
-import org.usfirst.frc.team6331.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -42,12 +39,12 @@ public class OI {
 	public int logRT = 8;
 	public int logLT = 7;
 	
-	public int xboxA = 0;
-	public int xboxB = 1;
-	public int xboxX = 2;
-	public int xboxY = 3;
+	public int xboxA = 1;
+	public int xboxB = 2;
+	public int xboxX = 3;
+	public int xboxY = 4;
 	public int xboxRB = 5;
-	public int xboxLB = 4;
+	public int xboxLB = 6;
 	public int xboxRX = 4;
 	public int xboxRY = 5;
 	public int xboxLX = 0;
@@ -73,9 +70,9 @@ public class OI {
 		 * Lift commands.
 		 */
 		new JoystickButton(log, logY).whenPressed(new LiftUp());
-		new JoystickButton(log, logY).whenReleased(new LiftStop());
+		new JoystickButton(log, logY).whenReleased(new LiftStall());
 		new JoystickButton(log, logA).whenPressed(new LiftDown());
-		new JoystickButton(log, logA).whenReleased(new LiftStop());
+		new JoystickButton(log, logA).whenReleased(new LiftStall());
 		
 		/**
 		 * Climb commands.
