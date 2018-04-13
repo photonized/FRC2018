@@ -7,21 +7,29 @@
 
 package org.usfirst.frc.team6331.robot;
 
-import org.usfirst.frc.team6331.robot.commands.AutoForward;
-import org.usfirst.frc.team6331.robot.commands.AutoLeft;
-import org.usfirst.frc.team6331.robot.commands.AutoMiddle;
-import org.usfirst.frc.team6331.robot.commands.AutoRight;
+import org.usfirst.frc.team6331.robot.commands.auto.AutoForward;
+import org.usfirst.frc.team6331.robot.commands.auto.AutoLeft;
+import org.usfirst.frc.team6331.robot.commands.auto.AutoMiddle;
+import org.usfirst.frc.team6331.robot.commands.auto.AutoRight;
+import org.usfirst.frc.team6331.robot.commands.auto.AutoSelect;
+import org.usfirst.frc.team6331.robot.commands.auto.MiddleLeft;
+import org.usfirst.frc.team6331.robot.commands.auto.MiddleRight;
+import org.usfirst.frc.team6331.robot.commands.auto.None;
+import org.usfirst.frc.team6331.robot.commands.drive.DriveStop;
 import org.usfirst.frc.team6331.robot.subsystems.Claw;
 import org.usfirst.frc.team6331.robot.subsystems.Climb;
 import org.usfirst.frc.team6331.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6331.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot; 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import enums.AutoMode;
+import enums.Position;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,15 +39,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+	
+	public static double AUTO_DELAY = 0;
+	public static AutoMode AUTO_MODE = null;
+	public static String GAME_DATA;
+	
 	public static OI oi;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	private SendableChooser<AutoMode> auto;
+	public static SendableChooser<Integer> delay;
+	private SendableChooser<Position> position;
+	
 
+	
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Claw claw = new Claw();
 	public static Lift lift = new Lift();
 	public static Climb climb = new Climb();
+	
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,15 +64,48 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
-		m_chooser.addDefault("Middle", new AutoMiddle());
-		m_chooser.addObject("Left", new AutoLeft());
-		m_chooser.addObject("Right", new AutoRight());
-		m_chooser.addDefault("Straight", new AutoForward());
-		SmartDashboard.putData("Auto mode", m_chooser);
-    	CameraServer.getInstance().startAutomaticCapture();
-	}
+		
+		System.out.println("Starting...");
+		
+		oi = new OI();		
+		System.out.println("OI started.");
+		
+		auto = new SendableChooser<>();
+		auto.addDefault("None", AUTO_MODE.NONE);
+		auto.addObject("Cross Line", AUTO_MODE.CROSS_LINE);
+		auto.addObject("Drop Cube", AUTO_MODE.DROP);
+		SmartDashboard.putData("Autonomous Mode:", auto);
+		System.out.println("Auto Modes Initialized...");
+		
+		
+		delay = new SendableChooser<>();
+		delay.addDefault("0", 0);
+		delay.addObject("1", 1);
+		delay.addObject("2", 2);
+		delay.addObject("3", 3);
+		delay.addObject("4", 4);
+		delay.addObject("5", 5);
+		delay.addObject("6", 6);
+		delay.addObject("7", 7);
+		delay.addObject("8", 8);
+		delay.addObject("9", 9);
+		delay.addObject("10", 10);
+		SmartDashboard.putData("Auto Delay", delay);
+		System.out.print("Auto delay initialized...");
+		
+		
+		position = new SendableChooser<>();
+		position.addDefault("Middle", Position.MIDDLE);
+		position.addObject("Left", Position.LEFT);
+		position.addObject("Right", Position.RIGHT);
+		SmartDashboard.putData("Start Position:", position);
+		System.out.println("Positions initialized...");
 
+		CameraServer.getInstance().startAutomaticCapture();
+		System.out.println("Camera initialized...");
+		
+		
+	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
@@ -63,12 +113,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+			System.out.println(GAME_DATA);
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
+		GAME_DATA = DriverStation.getInstance().getGameSpecificMessage();
 	}
 
 	/**
@@ -84,18 +134,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		
+		GAME_DATA = DriverStation.getInstance().getGameSpecificMessage();
+		
+		if(GAME_DATA.length() > 0) {
+			System.out.println("(Robot.java) Game data retrieved");
+			Command autoCommand = new AutoSelect(GAME_DATA, auto.getSelected(), position.getSelected()).getCommand();
+			autoCommand.start();
+		} else {
+			System.out.println("Error: game data not retrieved...");
 		}
 	}
 
@@ -105,6 +152,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		//System.out.print("AUTO: " + gameData + "\n");
 	}
 
 	@Override
@@ -113,9 +161,6 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
 	}
 
 	/**

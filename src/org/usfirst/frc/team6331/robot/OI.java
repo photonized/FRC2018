@@ -7,15 +7,15 @@
 
 package org.usfirst.frc.team6331.robot;
 
-import org.usfirst.frc.team6331.robot.commands.ClimbDown; 
-import org.usfirst.frc.team6331.robot.commands.ClimbStop;
-import org.usfirst.frc.team6331.robot.commands.ClimbUp;
-import org.usfirst.frc.team6331.robot.commands.LiftDown;
-import org.usfirst.frc.team6331.robot.commands.LiftStall;
-import org.usfirst.frc.team6331.robot.commands.LiftUp;
-import org.usfirst.frc.team6331.robot.commands.StopClaw;
-import org.usfirst.frc.team6331.robot.commands.SuckCube;
-import org.usfirst.frc.team6331.robot.commands.ThrowCube;
+import org.usfirst.frc.team6331.robot.commands.claw.StopClaw;
+import org.usfirst.frc.team6331.robot.commands.claw.SuckCube;
+import org.usfirst.frc.team6331.robot.commands.claw.ThrowCube;
+import org.usfirst.frc.team6331.robot.commands.climb.ClimbDown;
+import org.usfirst.frc.team6331.robot.commands.climb.ClimbStop;
+import org.usfirst.frc.team6331.robot.commands.climb.ClimbUp;
+import org.usfirst.frc.team6331.robot.commands.lift.LiftDown;
+import org.usfirst.frc.team6331.robot.commands.lift.LiftStall;
+import org.usfirst.frc.team6331.robot.commands.lift.LiftUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -63,26 +63,26 @@ public class OI {
 		/**
 		 * Claw commands.
 		 */
-		new JoystickButton(log, logRB).whenPressed(new ThrowCube());
-		new JoystickButton(log, logRB).whenReleased(new StopClaw());
-		new JoystickButton(log, logLB).whenPressed(new SuckCube());
-		new JoystickButton(log, logLB).whenReleased(new StopClaw());
+		new JoystickButton(log, logRT).whenPressed(new ThrowCube());
+		new JoystickButton(log, logRT).whenReleased(new StopClaw());
+		new JoystickButton(log, logLT).whenPressed(new SuckCube());
+		new JoystickButton(log, logLT).whenReleased(new StopClaw());
 		
 		/**
 		 * Lift commands.
 		 */
 		new JoystickButton(log, logY).whenPressed(new LiftUp());
 		new JoystickButton(log, logY).whenReleased(new LiftStall());
-		new JoystickButton(log, logA).whenPressed(new LiftDown());
-		new JoystickButton(log, logA).whenReleased(new LiftStall());
+		new JoystickButton(log, logB).whenPressed(new LiftDown());
+		new JoystickButton(log, logB).whenReleased(new LiftStall());
 		
 		/**
 		 * Climb commands.
 		 */
 		new JoystickButton(xbox, xboxY).whenPressed(new ClimbUp());
 		new JoystickButton(xbox, xboxY).whenReleased(new ClimbStop());
-		new JoystickButton(xbox, xboxA).whenPressed(new ClimbDown());
-		new JoystickButton(xbox, xboxA).whenReleased(new ClimbStop());
+		new JoystickButton(xbox, xboxB).whenPressed(new ClimbDown());
+		new JoystickButton(xbox, xboxB).whenReleased(new ClimbStop());
 	}
 	
 	public Joystick getXbox() {

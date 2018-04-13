@@ -16,7 +16,6 @@ public class Claw extends Subsystem {
 	public static final double stop = 0.0;
 	
 	private SpeedController m_thrower = new Victor(3);
-	private DigitalInput m_cubeDetector;
 
     public Claw() {
     	addChild("Thrower Motor", (Victor) m_thrower);
@@ -36,11 +35,6 @@ public class Claw extends Subsystem {
     public void out() {
     	m_thrower.set(output);
     }
-    
-    public boolean hasCube() {
-    	return m_cubeDetector.get();
-    }
-    
     protected void initDefaultCommand() {
     }
 }
