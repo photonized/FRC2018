@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetDriveSpeed extends Command {
 
 	private double m_speed;
+	
+	/**
+	 * Sets the drive speed for the required amount of time.
+	 * @param speed
+	 */
     public SetDriveSpeed(double speed) {
         requires(Robot.driveTrain);
         this.m_speed = speed;

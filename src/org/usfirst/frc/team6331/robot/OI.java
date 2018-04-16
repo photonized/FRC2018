@@ -25,8 +25,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	/**
-	 * The buttons on the controllers.
+	/*
+	 * The buttons on the controllers. Setting local variables 
+	 * and attaching them to the integer values of the button 
+	 * numbers in the driver station. You don't generally need 
+	 * to change these ever.
 	 */
 	public int logA = 2;
 	public int logB = 3;
@@ -54,14 +57,22 @@ public class OI {
 	public int xboxRT = 3;
 	public int xboxLT = 2;
 	
-	
+	/**
+	 * Initializing the actual controllers to their assigned port numbers.
+	 */
 	public Joystick xbox = new Joystick(0);
 	public Joystick log = new Joystick(1);
 	
+	
+	/**
+	 * The commands. The way it's made is to continuously initiate an instant command
+	 * when the specific button is pressed and use the stop command when the button
+	 * is released.
+	 */
 	public OI() {
 		
 		/**
-		 * Claw commands.
+		 * Claw commands. 
 		 */
 		new JoystickButton(log, logRT).whenPressed(new ThrowCube());
 		new JoystickButton(log, logRT).whenReleased(new StopClaw());
@@ -85,10 +96,19 @@ public class OI {
 		new JoystickButton(xbox, xboxB).whenReleased(new ClimbStop());
 	}
 	
+	
+	/**
+	 * Gets the Xbox controller for use in other classes.
+	 * @return Xbox Controller
+	 */
 	public Joystick getXbox() {
 		return xbox;
 	}
 	
+	/**
+	 * Gets the Logitech controller for use in other classes.
+	 * @return Logitech Controller
+	 */
 	public Joystick getLog() {
 		return log;
 	}

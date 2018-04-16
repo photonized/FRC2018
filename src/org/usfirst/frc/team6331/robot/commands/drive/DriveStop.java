@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStop extends Command {
 
+	/**
+	 * Stops the robot for the required time.
+	 * @param timeout
+	 */
     public DriveStop(double timeout) {
         requires(Robot.driveTrain);
         

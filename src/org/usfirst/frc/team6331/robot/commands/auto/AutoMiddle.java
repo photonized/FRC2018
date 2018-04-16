@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoMiddle extends CommandGroup {
 
+	/**
+	 * Middle switch, turns depending on the side.
+	 */
     public AutoMiddle() {    	
     	
     	String gameData = DriverStation.getInstance().getGameSpecificMessage();

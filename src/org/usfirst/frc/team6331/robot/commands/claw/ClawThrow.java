@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClawThrow extends Command {
 
+	/**
+	 * Uses the output for the claw for the time necessary.
+	 * @param timeout
+	 */
     public ClawThrow(double timeout) {
     	requires(Robot.claw);
     	this.setTimeout(timeout);

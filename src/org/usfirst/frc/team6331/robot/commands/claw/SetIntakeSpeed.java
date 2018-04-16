@@ -11,6 +11,10 @@ public class SetIntakeSpeed extends InstantCommand {
 
 	private double m_speed;
 	
+	/**
+	 * Sets intake speed to desired speed.
+	 * @param speed
+	 */
     public SetIntakeSpeed(double speed) {
        requires(Robot.claw);
        this.m_speed = speed;

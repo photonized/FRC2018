@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6331.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -10,12 +11,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Claw extends Subsystem {
 
-	
+	/**
+	 * Local claw speed variables.
+	 */
 	public static final double input = 1.0;
 	public static final double output = -1.0;
 	public static final double stop = 0.0;
 	
-	private SpeedController m_thrower = new Victor(3);
+	/**
+	 * Speed controller for the thrower.
+	 */
+	private SpeedController m_thrower = new Victor(3);//3
 
     public Claw() {
     	addChild("Thrower Motor", (Victor) m_thrower);

@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class StopClaw extends InstantCommand {
 
+	/**
+	 * Stops claw instantly.
+	 */
     public StopClaw() {
        requires(Robot.claw);
     }

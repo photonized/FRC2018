@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class ClimbStop extends InstantCommand {
 
+	/**
+	 * Instant climb stop.
+	 */
     public ClimbStop() {
         requires(Robot.climb);
     }

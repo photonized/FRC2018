@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClawGrab extends Command {
 
+	/**
+	 * The function used to intake with the claw with the duration required.
+	 * @param timeout
+	 */
     public ClawGrab(double timeout) {
         requires(Robot.claw);
         

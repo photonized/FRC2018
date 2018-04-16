@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class LiftDown extends InstantCommand {
 
+	/**
+	 * Instant lift down.
+	 */
     public LiftDown() {
         requires(Robot.lift);
     }

@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class ThrowCube extends InstantCommand {
 
+	
+	/**
+	 * Instant output.
+	 */
     public ThrowCube() {
         requires(Robot.claw);
     }

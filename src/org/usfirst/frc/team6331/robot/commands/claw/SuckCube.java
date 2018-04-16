@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  */
 public class SuckCube extends InstantCommand {
 
+	/**
+	 * Instant output.
+	 */
     public SuckCube() {
         requires(Robot.claw);
     }

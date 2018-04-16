@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveForward extends Command {
 
+	/**
+	 * Drives forward with the time required.
+	 * @param timeout
+	 */
     public DriveForward(double timeout) {
         requires(Robot.driveTrain);
         

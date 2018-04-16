@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnLeft extends Command {
 
+	/**
+	 * Turns left for the required amount of time.
+	 * @param timeout
+	 */
     public TurnLeft(double timeout) {
         requires(Robot.driveTrain);
         

@@ -4,13 +4,28 @@ import edu.wpi.first.wpilibj.command.Command;
 import enums.AutoMode;
 import enums.Position;
 
+/**
+ * Helps with auto selection and decides on the auto type depending on what is chosen on the
+ * SmartDashboard.
+ * @author Filthy Jew
+ *
+ */
 public class AutoSelect {
 	
+	/*
+	 * Local variables for the game data and the selections from the dashboard.
+	 */
 	private char[] GAME_DATA;
 	private AutoMode AUTO_MODE;
 	private Position SWITCH_POSITION;
 	private Position START_POSITION;
 	
+	/**
+	 * Gets the game data and the auto mode with the position.
+	 * @param gameData
+	 * @param autoMode
+	 * @param start
+	 */
 	public AutoSelect(String gameData, AutoMode autoMode, Position start) {
 		GAME_DATA = gameData.toCharArray();
 		AUTO_MODE = autoMode;
@@ -18,6 +33,10 @@ public class AutoSelect {
 		START_POSITION = start;
 }
 	
+	/**
+	 * Gets the position of our near switch.
+	 * @return Left switch or right switch.
+	 */
 	private Position getSwitchPosition() {
 		switch (GAME_DATA[0]) {
 		case 'L':
@@ -28,6 +47,10 @@ public class AutoSelect {
 			return null;
 	}
 }
+	/**
+	 * Gets the command based on what position and autoMode is chosen.
+	 * @return Auto command.
+	 */
 	public Command getCommand() {
 			if(AUTO_MODE == null) {
 				System.out.println("(AutoSelect.java): Auto mode is null");

@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoLeft extends CommandGroup {
 	
+	/**
+	 * Either forward for 1.5 seconds or drives to the side of the switch and turns left to put it in if it's friendly.
+	 */
     public AutoLeft() {
     	
     	String gameData = Robot.GAME_DATA;

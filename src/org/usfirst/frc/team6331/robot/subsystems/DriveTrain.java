@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
 
-    private SpeedController m_frontLeft = new Victor(7);
-    private SpeedController m_frontRight = new Victor(4);
-    private SpeedController m_backLeft = new Victor(0);
-    private SpeedController m_backRight = new Victor(1);
+    private SpeedController m_frontLeft = new Victor(7);//7
+    private SpeedController m_frontRight = new Victor(4);//4
+    private SpeedController m_backLeft = new Victor(0);//0
+    private SpeedController m_backRight = new Victor(1);//1
     private SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_backLeft);
     private SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_backRight);
     

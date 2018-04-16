@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class StallLift extends Command {
 
+	/**
+	 * Stalls lift for the required amount of time.
+	 * @param timeout
+	 */
     public StallLift(double timeout) {
         requires(Robot.lift);
         this.setTimeout(timeout);

@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class None extends CommandGroup {
 
+	/**
+	 * Doesn't do anything during auto. Keeps the bot stopped.
+	 */
     public None() {
     	addSequential(new DriveStop(10));
     }

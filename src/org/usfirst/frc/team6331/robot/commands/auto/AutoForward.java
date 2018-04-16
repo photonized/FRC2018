@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoForward extends CommandGroup {
 
+		/**
+		 * Forward for 1.5 seconds.
+		 */
     public AutoForward() {
     	addSequential(new DriveStop(Robot.delay.getSelected()));
         addSequential(new DriveForward(1.5));

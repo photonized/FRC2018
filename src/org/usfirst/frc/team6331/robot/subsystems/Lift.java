@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6331.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,7 +13,7 @@ public class Lift extends Subsystem {
 	public static final double off = 0.0;
 	public static final double stop = 0.3;
 	
-	private SpeedController m_lift = new Victor(9);
+	private SpeedController m_lift = new Victor(9);//9
 	
 	public Lift() {
 		addChild("Lift Motor", (Victor) m_lift);

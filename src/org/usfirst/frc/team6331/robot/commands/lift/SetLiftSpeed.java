@@ -11,6 +11,11 @@ public class SetLiftSpeed extends Command {
 
 	private double m_speed;
 	
+	/**
+	 * Sets lift speed to the desired speed for the required amount of time.
+	 * @param speed
+	 * @param timeout
+	 */
     public SetLiftSpeed(double speed, double timeout) {
     	requires(Robot.lift);
     	this.m_speed = speed;

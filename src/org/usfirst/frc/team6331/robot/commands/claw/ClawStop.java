@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ClawStop extends Command {
 
+	/**
+	 * Stops the claw during the timeout necessary.
+	 * @param timeout
+	 */
     public ClawStop(double timeout) {
         requires(Robot.claw);
         

@@ -7,15 +7,7 @@
 
 package org.usfirst.frc.team6331.robot;
 
-import org.usfirst.frc.team6331.robot.commands.auto.AutoForward;
-import org.usfirst.frc.team6331.robot.commands.auto.AutoLeft;
-import org.usfirst.frc.team6331.robot.commands.auto.AutoMiddle;
-import org.usfirst.frc.team6331.robot.commands.auto.AutoRight;
 import org.usfirst.frc.team6331.robot.commands.auto.AutoSelect;
-import org.usfirst.frc.team6331.robot.commands.auto.MiddleLeft;
-import org.usfirst.frc.team6331.robot.commands.auto.MiddleRight;
-import org.usfirst.frc.team6331.robot.commands.auto.None;
-import org.usfirst.frc.team6331.robot.commands.drive.DriveStop;
 import org.usfirst.frc.team6331.robot.subsystems.Claw;
 import org.usfirst.frc.team6331.robot.subsystems.Climb;
 import org.usfirst.frc.team6331.robot.subsystems.DriveTrain;
@@ -40,18 +32,31 @@ import enums.Position;
  */
 public class Robot extends TimedRobot {
 	
+	/*
+	 * Setting local variables for the autonomous information used in the AutoSelect.java
+	 * class.
+	 */
 	public static double AUTO_DELAY = 0;
 	public static AutoMode AUTO_MODE = null;
 	public static String GAME_DATA;
 	
+	/**
+	 * Local variable named oi for the OI object.
+	 */
 	public static OI oi;
 
+	
+	/*
+	 * Sendable chooser local variables for the selections on the Dashboard.
+	 */
 	private SendableChooser<AutoMode> auto;
 	public static SendableChooser<Integer> delay;
 	private SendableChooser<Position> position;
 	
 
-	
+	/*
+	 * Initializing the subsystems and adding local variables.
+	 */
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static Claw claw = new Claw();
 	public static Lift lift = new Lift();
@@ -70,6 +75,9 @@ public class Robot extends TimedRobot {
 		oi = new OI();		
 		System.out.println("OI started.");
 		
+		/*
+		 * Adds default and choice options for the auto selection.
+		 */
 		auto = new SendableChooser<>();
 		auto.addDefault("None", AUTO_MODE.NONE);
 		auto.addObject("Cross Line", AUTO_MODE.CROSS_LINE);
@@ -77,7 +85,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Autonomous Mode:", auto);
 		System.out.println("Auto Modes Initialized...");
 		
-		
+		/*
+		 * Adds default and choice options for the delay selection.
+		 */
 		delay = new SendableChooser<>();
 		delay.addDefault("0", 0);
 		delay.addObject("1", 1);
@@ -93,7 +103,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto Delay", delay);
 		System.out.print("Auto delay initialized...");
 		
-		
+		/*
+		 * Adds default and choice options for the position on the field selection.
+		 */
 		position = new SendableChooser<>();
 		position.addDefault("Middle", Position.MIDDLE);
 		position.addObject("Left", Position.LEFT);
@@ -101,10 +113,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Start Position:", position);
 		System.out.println("Positions initialized...");
 
+		/*
+		 * Initializes the camera.
+		 */
 		CameraServer.getInstance().startAutomaticCapture();
 		System.out.println("Camera initialized...");
-		
-		
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -113,32 +126,33 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-			System.out.println(GAME_DATA);
 	}
 
 	@Override
 	public void disabledPeriodic() {
+		/*
+		 * Constantly trying to get the game data.
+		 */
 		GAME_DATA = DriverStation.getInstance().getGameSpecificMessage();
 	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * chooser code works with the Java SmartDashboard.
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		/*
+		 * Updates game data right when auto starts.
+		 */
 		GAME_DATA = DriverStation.getInstance().getGameSpecificMessage();
 		
+		/*
+		 * Gets the selected information from the dashboard and uses it to select the command.
+		 */
 		if(GAME_DATA.length() > 0) {
-			System.out.println("(Robot.java) Game data retrieved");
+			System.out.println("(Robot.java) Game data retrieved: " + GAME_DATA + ".");
 			Command autoCommand = new AutoSelect(GAME_DATA, auto.getSelected(), position.getSelected()).getCommand();
 			autoCommand.start();
 		} else {
@@ -152,15 +166,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		//System.out.print("AUTO: " + gameData + "\n");
 	}
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
 	}
 
 	/**

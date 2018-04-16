@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveBack extends Command {
 
+	/**
+	 * Drives back with the time required in timeout.
+	 * @param timeout
+	 */
     public DriveBack(double timeout) {
         requires(Robot.driveTrain);
         

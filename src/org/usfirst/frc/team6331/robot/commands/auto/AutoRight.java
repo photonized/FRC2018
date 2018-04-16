@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoRight extends CommandGroup {
 
+	/**
+	 * Either goes forward for 1.5 seconds or goes to the side of the switch and turns left to put it in.
+	 */
     public AutoRight() {
     	
     	String gameData = DriverStation.getInstance().getGameSpecificMessage();
