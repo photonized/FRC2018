@@ -131,7 +131,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		/*
-		 * Constantly trying to get the game data.
+		 * Constantly trying to get the game data when robot is in disabled mode.
 		 */
 		GAME_DATA = DriverStation.getInstance().getGameSpecificMessage();
 	}
